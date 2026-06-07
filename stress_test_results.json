@@ -1,0 +1,18 @@
+[
+  {
+    "scenario_id": "earnings_beat",
+    "total_signals": 2,
+    "action_distribution": {
+      "BUY": 1,
+      "HOLD": 1
+    },
+    "avg_latency_ms": 0.01,
+    "metrics": {
+      "signal_alignment_rate": 0.5,
+      "bullish_signal_count": 2,
+      "bearish_signal_count": 0,
+      "strategy_buy_rate": 0.5,
+      "avg_confidence": 0.675
+    }
+  }
+]

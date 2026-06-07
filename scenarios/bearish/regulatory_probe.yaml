@@ -1,0 +1,48 @@
+scenario_id: regulatory_probe
+sentiment: bearish
+intensity: 0.75
+category: regulatory_risk
+
+triggers:
+  agency: [SEC, FTC, DOJ, CFTC, FDA]
+  probe_type: [informal_inquiry, formal_investigation, subpoena, consent_order]
+  disclosure_vehicle: [8K_filing, news_leak, regulatory_announcement]
+
+company_templates:
+  - name: "Crestfield Financial"
+    ticker: "CRFL"
+    sector: financials
+  - name: "Solara Energy"
+    ticker: "SLRA"
+    sector: energy
+  - name: "Meridian Biotech"
+    ticker: "MRBT"
+    sector: healthcare
+
+narrative_elements:
+  news_article:
+    lead_phrases:
+      - "{company} discloses {agency} inquiry into {practice}"
+      - "Shares of {ticker} tumbled after {company} revealed regulatory scrutiny"
+      - "{agency} opens formal probe of {company} over alleged {allegation}"
+    body_themes:
+      - "the company said it is 'cooperating fully' with {agency}"
+      - "analysts cut price targets citing 'elevated regulatory overhang'"
+      - "class action law firms announced investigations into {ticker}"
+    legal_disclaimers: true    # Generator appends standard legal language
+    analyst_downgrades: true
+
+  social_media:
+    platforms: [twitter_style, reddit_style]
+    tones: [panic_selling, short_thesis, defensive_longs]
+    hashtags: ["#{ticker}", "#SEC", "#regulatory"]
+
+cascade_events:
+  # Bearish scenarios can chain — models realistic contagion
+  - trigger: formal_investigation
+    chain_to: [analyst_downgrade, credit_watch, insider_selling_rumors]
+    delay_hours: [2, 8, 24]
+
+noise_injection:
+  bull_contrarian_ratio: 0.10   # "Buy the dip" crowd
+  legal_expert_ratio: 0.12      # Nuanced legal commentary

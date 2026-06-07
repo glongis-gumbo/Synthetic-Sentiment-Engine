@@ -1,0 +1,3 @@
+# Disallow all crawlers — this site contains synthetic test content only
+User-agent: *
+Disallow: /

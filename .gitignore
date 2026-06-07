@@ -1,0 +1,4 @@
+.env 
+__pycache__/ 
+*.pyc 
+stress_test_results.json 

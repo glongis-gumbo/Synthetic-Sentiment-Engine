@@ -1,0 +1,44 @@
+scenario_id: earnings_beat
+sentiment: bullish
+intensity: 0.85            # 0.0 = neutral, 1.0 = extreme
+category: fundamental
+
+triggers:
+  eps_beat_pct: [5, 10, 25, 50]     # % above consensus
+  revenue_beat_pct: [3, 8, 15]
+  guidance_revision: [up, significantly_up]
+
+company_templates:
+  # All companies are fictional — no real tickers
+  - name: "Nexora Systems"
+    ticker: "NXS"
+    sector: technology
+  - name: "Argent Capital Holdings"
+    ticker: "AGCH"
+    sector: financials
+  - name: "Veltrix Pharmaceuticals"
+    ticker: "VLTX"
+    sector: healthcare
+
+narrative_elements:
+  news_article:
+    lead_phrases:
+      - "{company} demolished analyst expectations"
+      - "{company} reported blowout Q{quarter} results"
+      - "Shares of {ticker} surged after {company} beat on all fronts"
+    body_themes:
+      - "record operating margins driven by {driver}"
+      - "management raised full-year guidance to {new_guidance}"
+      - "CEO cited {macro_positive} as tailwind entering {next_quarter}"
+    analyst_quotes: true
+    price_targets: true
+
+  social_media:
+    platforms: [twitter_style, reddit_style, stocktwits_style]
+    tones: [retail_euphoria, institutional_calm, technical_confirmation]
+    hashtags: ["#{ticker}", "#earnings", "#stockmarket"]
+
+noise_injection:
+  # Adds realism — not all coverage is perfectly bullish
+  skeptic_ratio: 0.15       # 15% of generated posts are cautious
+  off_topic_ratio: 0.05     # Simulates unrelated chatter in feed
